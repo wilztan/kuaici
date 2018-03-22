@@ -20,11 +20,17 @@ import Home from './Home';
 import Profile from './Profile';
 import QRpage from './QRpage';
 
-const TabNavigatorStack = TabNavigator({
-  Home: { screen: Home },
-  QRpage: {screen: QRpage },
-  Profile: { screen: Profile },
-});
+const TabNavigatorStack = TabNavigator(
+  {
+    Scan: {screen: QRpage },
+    Home: { screen: Home },
+    Profile: { screen: Profile },
+  },
+  {
+    initialRouteName: 'Home',
+    backgroundColor: '#fff',
+  }
+);
 
 export default class MainActivity extends React.Component {
   render() {

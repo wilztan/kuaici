@@ -29,6 +29,9 @@ const RootStack = StackNavigator(
     Menu: {
       screen: Menu,
     },
+    Seats:{
+      screen: SeatPick,
+    },
   },
   {
     initialRouteName: 'Main',
