@@ -9,12 +9,12 @@ import {
   Platform,
   StyleSheet,
   Text,
+  ScrollView,
   View,
   Button
 } from 'react-native';
 import {
-  StackNavigator,
-  TabNavigator
+  StackNavigator
 } from 'react-navigation';
 
 import MainActivity from './Pages/MainActivity';
@@ -25,21 +25,21 @@ const RootStack = StackNavigator(
   {
     Main: {
       screen: MainActivity,
-    },
-    Menu: {
-      screen: Menu,
-    },
-    Seats:{
-      screen: SeatPick,
-    },
+    }
   },
   {
     initialRouteName: 'Main',
-  }
+    navigationOptions: {
+      headerStyle: {
+      },
+    }
+  },
 );
 
 export default class App extends React.Component {
   render() {
-    return <RootStack />;
+    return (
+      <RootStack />
+    );
   }
 }

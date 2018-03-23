@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   FlatList
 } from 'react-native';
 import Item from './../Components/Item';
@@ -17,12 +18,25 @@ import Item from './../Components/Item';
 const item = [
   {
     name:"KFC",
-    price: "10000"
+    price: "18",
+    image: require('./../Assets/img/kfc.png')
   },
   {
     name:"MCD",
-    price: "20000"
+    price: "20",
+    image: require('./../Assets/img/mcd.png')
+  },
+  {
+    name:"Warmindo",
+    price: "10",
+    image: require('./../Assets/img/warmindo.jpg')
+  },
+  {
+    name:"Nasi Padang",
+    price: "20000",
+    image: require('./../Assets/img/nPadang.jpg')
   }
+
 ]
 
 type Props = {};
@@ -36,18 +50,20 @@ export default class Home extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
+        <Image
+          source={require('./../Assets/img/food.jpg')}
+        />
         <FlatList
           data={this.state.food}
           renderItem={({item,index}) =>
-            <Item key={index}>{item.name}</Item>
+            <Item
+              key={index.toString()}
+              image={item.image}
+              price={item.price}
+              >{item.name}
+            </Item>
           }
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     );

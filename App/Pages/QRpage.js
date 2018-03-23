@@ -2,12 +2,23 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
+  Button,
   StyleSheet
 } from 'react-native';
-
+import {
+  StackNavigator
+} from 'react-navigation';
 import Camera from 'react-native-camera';
 
-export default class QRpage extends Component {
+/**
+* Routing
+*/
+import Menu from './Menu';
+import SeatPick from './SeatPick';
+import Detail from './Detail';
+import Payment from './Payment';
+
+class QRscan extends Component {
 
     constructor(props) {
         super(props);
@@ -28,8 +39,18 @@ export default class QRpage extends Component {
     }
 
     render () {
-        return (
+        return (this.state.qrcode=='')?
+        (
             <View  style={styles.container}>
+              <Button
+                title="seat Pick"
+                onPress={
+                  ()=>this.props.navigation.navigate('Seats',
+                  {
+                    restaurantId: 1,
+                  })
+                }
+              />
               <Camera
                 style={styles.preview}
                 onBarCodeRead={this.onBarCodeRead}
@@ -42,6 +63,15 @@ export default class QRpage extends Component {
               </Camera>
             </View>
         )
+        :
+        <View
+          style={styles.container}
+          >
+          <Button
+            title="Scan Code"
+            onPress={()=>this.setState({qrcode:''})}
+          />
+        </View>
     }
 
 }
@@ -57,3 +87,37 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+const RootStack = StackNavigator(
+  {
+    Main: {
+      screen: QRscan,
+    },
+    Seats:{
+      screen: SeatPick,
+    },
+    Menu:{
+      screen: Menu,
+    },
+    Payment:{
+      screen: Payment,
+    },
+    Detail:{
+      screen: Detail,
+    }
+  },
+  {
+    initialRouteName: 'Main',
+    navigationOptions: {
+      headerStyle: {
+        display:"none",
+      },
+    },
+  }
+);
+
+export default class QRpage extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}

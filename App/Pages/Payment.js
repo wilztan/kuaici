@@ -9,6 +9,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  Button,
   View
 } from 'react-native';
 
@@ -22,17 +23,15 @@ const instructions = Platform.select({
 type Props = {};
 export default class Payment extends Component<Props> {
   render() {
+    const price = (this.props.price=='')? "1000Y" : this.props.price;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Text>You Need to Pay</Text>
+        <Text style={styles.paymentPrice}>1000 Y{price}</Text>
+        <Button
+          title="Pay Now"
+          onPress={()=>alert('Paid')}
+        />
       </View>
     );
   }
@@ -50,9 +49,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  paymentPrice:{
+    fontSize:50,
+    textAlign:'center',
+    fontWeight:'bold'
+  }
 });

@@ -9,7 +9,9 @@ import {
   Platform,
   StyleSheet,
   Text,
+  Image,
   View,
+  Dimensions,
   TouchableHighlight,
 } from 'react-native';
 
@@ -18,13 +20,40 @@ type Props = {};
 export default class Item extends Component<Props> {
   render() {
     return (
-      <TouchableHighlight>
-        <Text>{this.props.children}</Text>
+      <TouchableHighlight
+        onPress={()=>this.props.pressMethod}
+        >
+        <View
+          style={styles.listView} >
+          <Image
+            source={this.props.image}
+            style={{width:win.width * 2/5}}
+            resizeMode="contain"
+          />
+          <View>
+            <Text style={{width:win.width * 3/5}}>{this.props.name}</Text>
+            <Text style={{width:win.width * 3/5}}>{this.props.children}</Text>
+            <Text style={{width:win.width * 3/5}}>Price {this.props.price}</Text>
+            {/* <Text style={{width:win.width * 3/5}}>{this.props.image}</Text> */}
+          </View>
+        </View>
       </TouchableHighlight>
     );
   }
 }
 
-const styles = StyleSheet.create({
 
+const win = Dimensions.get('window');
+const widthInContainer = win.width - 10;
+
+const styles = StyleSheet.create({
+  flatListView:{
+    width: widthInContainer-10,
+    marginLeft:10,
+  },
+  listView:{
+    margin:1,
+    backgroundColor:"#dddddd",
+    flexDirection:"row",
+  }
 });
